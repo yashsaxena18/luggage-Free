@@ -16,7 +16,9 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
   'https://luggagefree.vercel.app',
+  'https://luggagefree-client-nmrxguvqf-yash-saxenas-projects-a11d8600.vercel.app', // ✅ Add this
 ];
+
 
 app.use(cors({
   origin: function (origin, callback) {
