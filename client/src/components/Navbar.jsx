@@ -37,6 +37,7 @@ export default function Navbar() {
     { label: "Home", path: "/" },
     { label: "Booking", path: "/book" },
     { label: "Track", path: "/track" },
+    { label: "Pricing", path: "/pricing" },
     { label: "About", path: "/about" },
     { label: "Contact", path: "/contact" },
     ...(isLoggedIn ? [{ label: "Dashboard", path: "/dashboard" }] : []),

@@ -10,6 +10,7 @@ import About from "./routes/About";
 import Login from "./routes/Login";
 import Signup from "./routes/Signup";
 import Dashboard from "./routes/Dashboard";
+import Price from "./routes/Price";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/track" element={<Track />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        <Route path="/pricing" element={<Price />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />

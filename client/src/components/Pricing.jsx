@@ -1,46 +1,62 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Star, Zap, Heart } from "lucide-react";
+import { Check, Star, Heart, Zap } from "lucide-react";
 
-function Pricing() {
+export default function Price() {
+  const [selectedPlan, setSelectedPlan] = useState(null);
+
   const plans = [
     {
-      title: "Basic",
-      price: "₹299",
+      id: 'basic',
+      name: 'Basic',
+      price: 299,
+      icon: <Check className="w-8 h-8 text-cyan-400" />,
       features: [
-        "Pickup & delivery",
-        "Up to 15kg",
-        "Track via ID",
-        "Email support",
+        'Pickup & delivery',
+        'Up to 15kg',
+        'Track via ID',
+        'Email support'
       ],
-      icon: <Check className="w-6 h-6" />,
-      gradient: "from-blue-500 to-cyan-500",
+      buttonText: 'Choose Plan',
+      popular: false,
+      gradient: "from-blue-500 to-cyan-500"
     },
     {
-      title: "Priority",
-      price: "₹499",
+      id: 'priority',
+      name: 'Priority',
+      price: 499,
+      icon: <Zap className="w-8 h-8 text-pink-400" />,
       features: [
-        "Faster delivery",
-        "Up to 20kg",
-        "Live GPS tracking",
-        "Priority support",
+        'Faster delivery',
+        'Up to 20kg',
+        'Live GPS tracking',
+        'Priority support'
       ],
-      highlight: true,
-      icon: <Zap className="w-6 h-6" />,
-      gradient: "from-purple-500 to-pink-500",
+      buttonText: 'Choose Plan',
+      popular: true,
+      gradient: "from-purple-500 to-pink-500"
     },
     {
-      title: "Wedding Pack",
-      price: "₹999",
+      id: 'wedding',
+      name: 'Wedding Pack',
+      price: 999,
+      icon: <Heart className="w-8 h-8 text-orange-400" />,
       features: [
-        "Multiple bags",
-        "Up to 50kg",
-        "Group delivery",
-        "Dedicated agent",
+        'Multiple bags',
+        'Up to 50kg',
+        'Group delivery',
+        'Dedicated agent'
       ],
-      icon: <Heart className="w-6 h-6" />,
-      gradient: "from-rose-500 to-orange-500",
-    },
+      buttonText: 'Choose Plan',
+      popular: false,
+      gradient: "from-rose-500 to-orange-500"
+    }
   ];
+
+  const handlePlanSelect = (planId) => {
+    setSelectedPlan(planId);
+    console.log(`Selected plan: ${planId}`);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -104,6 +120,7 @@ function Pricing() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-4">
       <div className="max-w-6xl mx-auto">
+        {/* Header Section */}
         <motion.div 
           className="text-center mb-16"
           initial="hidden"
@@ -119,7 +136,7 @@ function Pricing() {
               <Star className="w-8 h-8 text-white" />
             </div>
           </motion.div>
-          <motion.h2 
+          <motion.h1 
             className="text-5xl font-bold text-white mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -146,32 +163,33 @@ function Pricing() {
                 {word}
               </motion.span>
             ))}
-          </motion.h2>
+          </motion.h1>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Choose the perfect plan for your laundry needs with our affordable and transparent pricing
           </p>
         </motion.div>
 
+        {/* Pricing Cards */}
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
-          {plans.map((plan, index) => (
+          {plans.map((plan) => (
             <motion.div
-              key={index}
+              key={plan.id}
               className={`
                 relative group cursor-pointer
-                ${plan.highlight 
+                ${plan.popular 
                   ? 'md:scale-105 md:-translate-y-4' 
                   : ''
                 }
               `}
               variants={cardVariants}
               whileHover={{ 
-                scale: plan.highlight ? 1.02 : 1.05,
-                y: plan.highlight ? -20 : -10,
+                scale: plan.popular ? 1.02 : 1.05,
+                y: plan.popular ? -20 : -10,
               }}
               whileTap={{ scale: 0.98 }}
             >
@@ -181,8 +199,8 @@ function Pricing() {
                 bg-gradient-to-r ${plan.gradient} blur-xl -z-10
               `} />
               
-              {/* Highlight badge */}
-              {plan.highlight && (
+              {/* Popular badge */}
+              {plan.popular && (
                 <motion.div
                   className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10"
                   initial={{ scale: 0, rotate: -180 }}
@@ -200,7 +218,8 @@ function Pricing() {
                 relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 h-full
                 border border-white/20 shadow-2xl
                 transition-all duration-300 group-hover:bg-white/15
-                ${plan.highlight ? 'ring-2 ring-purple-500/50' : ''}
+                ${plan.popular ? 'ring-2 ring-purple-500/50' : ''}
+                ${selectedPlan === plan.id ? 'ring-2 ring-yellow-400' : ''}
               `}>
                 {/* Icon */}
                 <motion.div
@@ -218,7 +237,7 @@ function Pricing() {
 
                 {/* Title */}
                 <h3 className="text-2xl font-bold text-white mb-2">
-                  {plan.title}
+                  {plan.name}
                 </h3>
 
                 {/* Price */}
@@ -227,7 +246,7 @@ function Pricing() {
                   whileHover={{ scale: 1.05 }}
                 >
                   <span className="text-4xl font-bold text-white">
-                    {plan.price}
+                    ₹{plan.price}
                   </span>
                   <span className="text-slate-300 ml-2">per service</span>
                 </motion.div>
@@ -256,12 +275,14 @@ function Pricing() {
 
                 {/* Button */}
                 <motion.button
+                  onClick={() => handlePlanSelect(plan.id)}
                   className={`
                     w-full py-4 px-6 rounded-2xl font-semibold transition-all duration-300
-                    ${plan.highlight
+                    ${plan.popular
                       ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg hover:shadow-purple-500/25'
                       : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
                     }
+                    ${selectedPlan === plan.id ? 'ring-2 ring-yellow-400' : ''}
                   `}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -271,7 +292,7 @@ function Pricing() {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.8 }}
                   >
-                    Choose Plan
+                    {selectedPlan === plan.id ? 'Selected' : plan.buttonText}
                   </motion.span>
                 </motion.button>
               </div>
@@ -279,9 +300,9 @@ function Pricing() {
           ))}
         </motion.div>
 
-        {/* Bottom section */}
+        {/* Footer Note */}
         <motion.div 
-          className="text-center mt-16"
+          className="text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
@@ -301,5 +322,3 @@ function Pricing() {
     </div>
   );
 }
-
-export default Pricing;
