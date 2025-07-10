@@ -21,8 +21,7 @@ import {
   X,
   Save,
 } from "lucide-react";
-import { BASE_URL } from '../utils/api'; // ✅ Adjust path if needed
-
+import { BASE_URL } from "../utils/api"; // ✅ Adjust path if needed
 
 export default function BookingDashboard() {
   const [currentView, setCurrentView] = useState("dashboard");
@@ -301,14 +300,17 @@ export default function BookingDashboard() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`${BASE_URL}/api/bookings/modify/${bookingId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(editForm),
-      });
+      const response = await fetch(
+        `${BASE_URL}/api/bookings/modify/${bookingId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(editForm),
+        }
+      );
 
       const data = await response.json();
 
@@ -434,10 +436,10 @@ export default function BookingDashboard() {
               </div>
             </div>
           </div>
-
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8 px-2">
+            {/* Total Bookings */}
+            <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 text-white w-full max-w-xs mx-auto md:max-w-full">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-blue-100 text-sm">Total Bookings</p>
@@ -447,7 +449,8 @@ export default function BookingDashboard() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl p-6 text-white">
+            {/* Pending */}
+            <div className="bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl p-6 text-white w-full max-w-xs mx-auto md:max-w-full">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-yellow-100 text-sm">Pending</p>
@@ -462,7 +465,8 @@ export default function BookingDashboard() {
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-6 text-white">
+            {/* In Transit */}
+            <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl p-6 text-white w-full max-w-xs mx-auto md:max-w-full">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-purple-100 text-sm">In Transit</p>
