@@ -36,6 +36,7 @@ export default function BookingDashboard() {
   const [editForm, setEditForm] = useState({});
 
   // Get user info from localStorage or token
+  //This code snippet defines a function that retrieves a JWT token from local storage, decodes it, and extracts user information like ID, name, and email.
   useEffect(() => {
     const getUserFromToken = () => {
       const token = localStorage.getItem("token");
@@ -160,25 +161,25 @@ export default function BookingDashboard() {
 
     const drivers = [
       {
-        name: "Rajesh Kumar",
+        name: "Shah Rukh Khan",
         phone: "+91 98765 43210",
         vehicle: "Tata Ace (DL-8C-1234)",
         rating: 4.8,
       },
       {
-        name: "Priya Sharma",
+        name: "Amitabh Bachchan",
         phone: "+91 87654 32109",
         vehicle: "Mahindra Bolero (MH-01-2345)",
         rating: 4.9,
       },
       {
-        name: "Kiran Reddy",
+        name: "Rajinikanth",
         phone: "+91 76543 21098",
         vehicle: "Maruti Eeco (KA-03-5678)",
         rating: 4.7,
       },
       {
-        name: "Amit Singh",
+        name: "Mia Bhai DSP Siraj",
         phone: "+91 95432 10987",
         vehicle: "Ashok Leyland (UP-16-7890)",
         rating: 4.6,
@@ -299,7 +300,7 @@ export default function BookingDashboard() {
   const handleSaveEdit = async (bookingId) => {
     try {
       const token = localStorage.getItem("token");
-
+    //Sends a PUT request to the backend to modify an existing booking.
       const response = await fetch(
         `${BASE_URL}/api/bookings/modify/${bookingId}`,
         {
@@ -415,7 +416,7 @@ export default function BookingDashboard() {
                     </p>
                   </div>
                 </div>
-                <h1 className="text-4xl font-bold text-white mb-2">
+                <h1 className="text-3xl font-bold text-white mb-2">
                   Luggage Dashboard
                 </h1>
                 <p className="text-slate-300">
