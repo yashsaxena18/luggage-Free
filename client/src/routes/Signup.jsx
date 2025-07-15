@@ -77,7 +77,7 @@ export default function Signup() {
           <p className="text-center text-gray-600">
             Already have an account?{" "}
             <span
-              onClick={goToLogin}
+              onClick={() => window.location.href = '/login'}
               className="text-indigo-600 font-semibold hover:underline cursor-pointer"
             >
               Login
