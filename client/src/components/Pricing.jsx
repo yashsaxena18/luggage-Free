@@ -7,55 +7,56 @@ export default function Price() {
 
   const plans = [
     {
-      id: 'basic',
-      name: 'Basic',
+      id: "basic",
+      name: "Basic",
       price: 299,
       icon: <Check className="w-8 h-8 text-cyan-400" />,
       features: [
-        'Pickup & delivery',
-        'Up to 15kg',
-        'Track via ID',
-        'Email support'
+        "Pickup & delivery",
+        "Up to 15kg",
+        "Track via ID",
+        "Email support",
       ],
-      buttonText: 'Choose Plan',
       popular: false,
-      gradient: "from-blue-500 to-cyan-500"
+      gradient: "from-blue-500 to-cyan-500",
     },
     {
-      id: 'priority',
-      name: 'Priority',
+      id: "priority",
+      name: "Priority",
       price: 499,
       icon: <Zap className="w-8 h-8 text-pink-400" />,
       features: [
-        'Faster delivery',
-        'Up to 20kg',
-        'Live GPS tracking',
-        'Priority support'
+        "Faster delivery",
+        "Up to 20kg",
+        "Live GPS tracking",
+        "Priority support",
       ],
-      buttonText: 'Choose Plan',
+      buttonText: "Choose Plan",
       popular: true,
-      gradient: "from-purple-500 to-pink-500"
+      gradient: "from-purple-500 to-pink-500",
     },
     {
-      id: 'wedding',
-      name: 'Wedding Pack',
+      id: "wedding",
+      name: "Wedding Pack",
       price: 999,
       icon: <Heart className="w-8 h-8 text-orange-400" />,
       features: [
-        'Multiple bags',
-        'Up to 50kg',
-        'Group delivery',
-        'Dedicated agent'
+        "Multiple bags",
+        "Up to 50kg",
+        "Group delivery",
+        "Dedicated agent",
       ],
-      buttonText: 'Choose Plan',
       popular: false,
-      gradient: "from-rose-500 to-orange-500"
-    }
+      gradient: "from-rose-500 to-orange-500",
+    },
   ];
 
   const handlePlanSelect = (planId) => {
     setSelectedPlan(planId);
-    console.log(`Selected plan: ${planId}`);
+    const bookingSection = document.getElementById("booking");
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const containerVariants = {
@@ -70,11 +71,7 @@ export default function Price() {
   };
 
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 50,
-      scale: 0.9,
-    },
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
     visible: {
       opacity: 1,
       y: 0,
@@ -88,10 +85,7 @@ export default function Price() {
   };
 
   const titleVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: -30,
-    },
+    hidden: { opacity: 0, y: -30 },
     visible: {
       opacity: 1,
       y: 0,
@@ -120,8 +114,8 @@ export default function Price() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-4">
       <div className="max-w-6xl mx-auto">
-        {/* Header Section */}
-        <motion.div 
+        {/* Header */}
+        <motion.div
           className="text-center mb-16"
           initial="hidden"
           animate="visible"
@@ -136,8 +130,8 @@ export default function Price() {
               <Star className="w-8 h-8 text-white" />
             </div>
           </motion.div>
-          <motion.h1 
-            className="text-5xl font-bold text-white mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+          <motion.h1
+            className="text-3xl sm:text-5xl font-bold text-white mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
@@ -148,30 +142,30 @@ export default function Price() {
                 className="inline-block mr-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
+                transition={{
                   delay: 0.5 + index * 0.1,
                   duration: 0.6,
                   type: "spring",
-                  damping: 25
+                  damping: 25,
                 }}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   color: "#ffffff",
-                  transition: { duration: 0.2 }
+                  transition: { duration: 0.2 },
                 }}
               >
                 {word}
               </motion.span>
             ))}
           </motion.h1>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Choose the perfect plan for your laundry needs with our affordable and transparent pricing
           </p>
         </motion.div>
 
         {/* Pricing Cards */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"
+        <motion.div
+          className="flex flex-row gap-6 sm:gap-8 mb-12 overflow-x-auto md:grid md:grid-cols-3 md:overflow-visible no-scrollbar"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
@@ -181,24 +175,25 @@ export default function Price() {
               key={plan.id}
               className={`
                 relative group cursor-pointer
-                ${plan.popular 
-                  ? 'md:scale-105 md:-translate-y-4' 
-                  : ''
-                }
+                ${plan.popular ? "md:scale-105 md:-translate-y-4" : ""}
+                flex-shrink-0 w-[85vw] sm:w-[70vw] md:w-auto
               `}
               variants={cardVariants}
-              whileHover={{ 
-                scale: plan.popular ? 1.02 : 1.05,
-                y: plan.popular ? -20 : -10,
-              }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={
+                typeof window !== "undefined" && window.innerWidth >= 768
+                  ? { scale: 1.05, y: -10 }
+                  : {}
+              }
+              whileTap={{ scale: 0.97 }}
             >
-              {/* Glow effect */}
-              <div className={`
-                absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500
-                bg-gradient-to-r ${plan.gradient} blur-xl -z-10
-              `} />
-              
+              {/* Glow */}
+              <div
+                className={`
+                  absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500
+                  bg-gradient-to-r ${plan.gradient} blur-xl -z-10
+                `}
+              />
+
               {/* Popular badge */}
               {plan.popular && (
                 <motion.div
@@ -214,45 +209,41 @@ export default function Price() {
               )}
 
               {/* Card */}
-              <div className={`
-                relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 h-full
-                border border-white/20 shadow-2xl
-                transition-all duration-300 group-hover:bg-white/15
-                ${plan.popular ? 'ring-2 ring-purple-500/50' : ''}
-                ${selectedPlan === plan.id ? 'ring-2 ring-yellow-400' : ''}
-              `}>
+              <div
+                className={`
+                  relative bg-white/10 backdrop-blur-xl rounded-3xl p-6 sm:p-8 h-full
+                  border border-white/20 shadow-2xl
+                  transition-all duration-300 group-hover:bg-white/15
+                  ${plan.popular ? "ring-2 ring-purple-500/50" : ""}
+                  ${selectedPlan === plan.id ? "ring-2 ring-yellow-400" : ""}
+                `}
+              >
                 {/* Icon */}
                 <motion.div
                   className={`
-                    w-16 h-16 rounded-2xl bg-gradient-to-r ${plan.gradient} 
-                    flex items-center justify-center mb-6 shadow-lg
+                    w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-r ${plan.gradient} 
+                    flex items-center justify-center mb-4 sm:mb-6 shadow-lg
                   `}
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <div className="text-white">
-                    {plan.icon}
-                  </div>
+                  <div className="text-white">{plan.icon}</div>
                 </motion.div>
 
-                {/* Title */}
-                <h3 className="text-2xl font-bold text-white mb-2">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
                   {plan.name}
                 </h3>
 
-                {/* Price */}
-                <motion.div 
-                  className="mb-8"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <span className="text-4xl font-bold text-white">
+                <motion.div className="mb-6 sm:mb-8">
+                  <span className="text-3xl sm:text-4xl font-bold text-white">
                     ₹{plan.price}
                   </span>
-                  <span className="text-slate-300 ml-2">per service</span>
+                  <span className="text-slate-300 ml-2 text-sm sm:text-base">
+                    per service
+                  </span>
                 </motion.div>
 
-                {/* Features */}
-                <ul className="space-y-4 mb-8">
+                <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                   {plan.features.map((feature, i) => (
                     <motion.li
                       key={i}
@@ -262,10 +253,12 @@ export default function Price() {
                       animate="visible"
                       variants={featureVariants}
                     >
-                      <div className={`
-                        w-5 h-5 rounded-full bg-gradient-to-r ${plan.gradient} 
-                        flex items-center justify-center mr-3 flex-shrink-0
-                      `}>
+                      <div
+                        className={`
+                          w-5 h-5 rounded-full bg-gradient-to-r ${plan.gradient} 
+                          flex items-center justify-center mr-3 flex-shrink-0
+                        `}
+                      >
                         <Check className="w-3 h-3 text-white" />
                       </div>
                       <span className="text-sm font-medium">{feature}</span>
@@ -273,16 +266,14 @@ export default function Price() {
                   ))}
                 </ul>
 
-                {/* Button */}
                 <motion.button
                   onClick={() => handlePlanSelect(plan.id)}
                   className={`
-                    w-full py-4 px-6 rounded-2xl font-semibold transition-all duration-300
+                    w-full py-3 sm:py-4 px-6 rounded-2xl font-semibold transition-all duration-300
                     ${plan.popular
-                      ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg hover:shadow-purple-500/25'
-                      : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
-                    }
-                    ${selectedPlan === plan.id ? 'ring-2 ring-yellow-400' : ''}
+                      ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg hover:shadow-purple-500/25"
+                      : "bg-white/10 text-white border border-white/20 hover:bg-white/20"}
+                    ${selectedPlan === plan.id ? "ring-2 ring-yellow-400" : ""}
                   `}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -292,7 +283,7 @@ export default function Price() {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.8 }}
                   >
-                    {selectedPlan === plan.id ? 'Selected' : plan.buttonText}
+                    {selectedPlan === plan.id ? "Selected" : "Choose Now"}
                   </motion.span>
                 </motion.button>
               </div>
@@ -301,17 +292,17 @@ export default function Price() {
         </motion.div>
 
         {/* Footer Note */}
-        <motion.div 
+        <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
         >
-          <p className="text-slate-300 mb-4">
+          <p className="text-slate-300 mb-4 text-sm sm:text-base">
             All plans include free pickup and delivery within city limits
           </p>
           <motion.button
-            className="text-purple-400 hover:text-purple-300 font-semibold transition-colors duration-300"
+            className="text-purple-400 hover:text-purple-300 font-semibold transition-colors duration-300 text-sm sm:text-base"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

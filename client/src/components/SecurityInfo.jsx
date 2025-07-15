@@ -3,22 +3,22 @@ import { useState, useEffect } from "react";
 
 const securityPoints = [
   {
-    icon: <ShieldCheck className="text-purple-600 w-8 h-8" />,
+    icon: <ShieldCheck className="text-purple-600 w-8 h-8 sm:w-8 sm:h-8" />,
     title: "Tamper-Proof Sealing",
     desc: "Each bag is sealed securely with tamper-evident tags.",
   },
   {
-    icon: <MapPin className="text-purple-600 w-8 h-8" />,
+    icon: <MapPin className="text-purple-600 w-8 h-8 sm:w-8 sm:h-8" />,
     title: "Live Tracking",
     desc: "Track your luggage in real time using your Booking ID.",
   },
   {
-    icon: <AlertCircle className="text-purple-600 w-8 h-8" />,
+    icon: <AlertCircle className="text-purple-600 w-8 h-8 sm:w-8 sm:h-8" />,
     title: "₹10,000 Insurance",
     desc: "All deliveries are insured up to ₹10,000 for peace of mind.",
   },
   {
-    icon: <Clock4 className="text-purple-600 w-8 h-8" />,
+    icon: <Clock4 className="text-purple-600 w-8 h-8 sm:w-8 sm:h-8" />,
     title: "24/7 Support",
     desc: "Always available via call, chat or email for your queries.",
   },
@@ -66,12 +66,12 @@ function SecurityInfo() {
           }
         `}</style>
 
-        {/* Cards Grid */}
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Cards Grid - Mobile: 2x2, Desktop: 1x4 */}
+        <div className="grid gap-4 grid-cols-2 sm:gap-8 lg:grid-cols-4">
           {securityPoints.map((item, index) => (
             <div
               key={index}
-              className={`group relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 min-h-[280px] flex flex-col items-center text-center transition-all duration-700 hover:scale-105 ${
+              className={`group relative bg-white/90 backdrop-blur-sm rounded-2xl p-4 sm:p-8 min-h-[200px] sm:min-h-[280px] flex flex-col items-center text-center transition-all duration-700 hover:scale-105 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
               }`}
               style={{
@@ -87,17 +87,17 @@ function SecurityInfo() {
               <div className="absolute inset-0 rounded-2xl bg-white/95 backdrop-blur-sm transition-all duration-300"></div>
               
               {/* Icon Container */}
-              <div className="relative mb-6 p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl group-hover:from-purple-100 group-hover:to-pink-100 transition-all duration-300 transform group-hover:scale-110">
+              <div className="relative mb-3 sm:mb-6 p-2 sm:p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl group-hover:from-purple-100 group-hover:to-pink-100 transition-all duration-300 transform group-hover:scale-110">
                 <div className="relative transform group-hover:rotate-12 transition-transform duration-300">
                   {item.icon}
                 </div>
               </div>
 
               {/* Content */}
-              <h3 className="relative text-xl font-semibold text-gray-800 mb-4 group-hover:text-purple-700 transition-colors duration-300">
+              <h3 className="relative text-sm sm:text-xl font-semibold text-gray-800 mb-2 sm:mb-4 group-hover:text-purple-700 transition-colors duration-300">
                 {item.title}
               </h3>
-              <p className="relative text-gray-600 text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+              <p className="relative text-gray-600 text-xs sm:text-sm leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
                 {item.desc}
               </p>
 

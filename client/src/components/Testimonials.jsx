@@ -21,19 +21,19 @@ function Testimonials() {
         "Super secure and always on time. I'll never carry heavy bags again!",
     },
     {
-      name: "Simran Kaur",
+      name: "Mia Uma",
       image: "https://randomuser.me/api/portraits/women/65.jpg",
       quote:
         "I had to fly urgently — LuggageFree handled my bags like pros. 10/10!",
     },
     {
-      name: "Kabir Joshi",
+      name: "Aryan",
       image: "https://randomuser.me/api/portraits/men/55.jpg",
       quote:
         "Their real-time tracking was a game changer during my Ladakh bike trip!",
     },
     {
-      name: "Nikita Desai",
+      name: "Ankita",
       image: "https://randomuser.me/api/portraits/women/30.jpg",
       quote:
         "Affordable, fast, and trustworthy. Exactly what I needed for college relocation.",
@@ -63,12 +63,12 @@ function Testimonials() {
           <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 grid-cols-3 w-full max-w-full">
           {testimonials.map((t, index) => (
             <div
               key={index}
-              className={`group relative transform transition-all duration-500 ease-out ${
-                hoveredIndex === index ? 'scale-105 z-20' : 'scale-100'
+              className={`group flex-shrink-0 w-[85vw] sm:w-auto relative transform transition-all duration-500 ease-out ${
+                hoveredIndex === index ? "sm:scale-105 z-20" : "scale-100"
               }`}
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -78,40 +78,40 @@ function Testimonials() {
             >
               {/* Glow Effect */}
               <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-2xl blur opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
-              
+
               {/* Card */}
-              <div className="relative bg-slate-800/40 backdrop-blur-lg rounded-2xl p-8 min-h-[280px] border border-slate-700/50 hover:border-purple-400/60 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/25">
+              <div className="relative bg-slate-800/40 backdrop-blur-lg rounded-2xl p-4 sm:p-8 min-h-[200px] sm:min-h-[280px] border border-slate-700/50 hover:border-purple-400/60 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/25">
                 {/* Gradient Border on Hover */}
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
+
                 {/* Content */}
                 <div className="relative z-10">
                   {/* Profile Image with Glow */}
-                  <div className="relative mb-6">
-                    <div className="absolute inset-0 w-20 h-20 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-lg opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
+                  <div className="relative mb-4 sm:mb-6">
+                    <div className="absolute inset-0 w-12 h-12 sm:w-20 sm:h-20 mx-auto bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-lg opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
                     <img
                       src={t.image}
                       alt={t.name}
-                      className="relative w-20 h-20 rounded-full mx-auto object-cover border-2 border-purple-400/50 group-hover:border-purple-300 transition-colors duration-500"
+                      className="relative w-12 h-12 sm:w-20 sm:h-20 rounded-full mx-auto object-cover border-2 border-purple-400/50 group-hover:border-purple-300 transition-colors duration-500"
                     />
                   </div>
 
                   {/* Name */}
-                  <h3 className="text-xl font-semibold text-white mb-4 group-hover:text-purple-200 transition-colors duration-300">
+                  <h3 className="text-sm sm:text-xl font-semibold text-white mb-2 sm:mb-4 group-hover:text-purple-200 transition-colors duration-300">
                     {t.name}
                   </h3>
 
                   {/* Quote */}
-                  <p className="text-slate-300 text-sm leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
                     "{t.quote}"
                   </p>
 
                   {/* Decorative Stars */}
-                  <div className="flex justify-center mt-6 space-x-1">
+                  <div className="flex justify-center mt-3 sm:mt-6 space-x-1">
                     {[...Array(5)].map((_, i) => (
                       <div
                         key={i}
-                        className="w-4 h-4 text-yellow-400 opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                        className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400 opacity-60 group-hover:opacity-100 transition-opacity duration-300"
                         style={{ animationDelay: `${i * 100}ms` }}
                       >
                         ⭐
@@ -133,19 +133,24 @@ function Testimonials() {
 
       <style jsx>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
+          0%,
+          100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-20px) rotate(180deg);
+          }
         }
-        
+
         .animate-float {
           animation: float 6s ease-in-out infinite;
         }
-        
+
         .animate-float-delayed {
           animation: float 6s ease-in-out infinite;
           animation-delay: 2s;
         }
-        
+
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -156,7 +161,7 @@ function Testimonials() {
             transform: translateY(0);
           }
         }
-        
+
         .animate-fadeInUp {
           animation: fadeInUp 0.8s ease-out forwards;
         }

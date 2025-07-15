@@ -59,7 +59,7 @@ function HowItWorks() {
         </div>
 
         {/* Steps grid */}
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, index) => {
             const IconComponent = step.icon;
             const isHovered = hoveredCard === index;
@@ -69,8 +69,8 @@ function HowItWorks() {
                 key={index}
                 className={`
                   relative group cursor-pointer transform transition-all duration-700 
-                  ${isHovered ? 'scale-110 z-10' : 'hover:scale-105'}
-                  ${index % 2 === 0 ? 'animate-bounce' : 'animate-pulse'}
+                  ${isHovered ? 'sm:scale-110 z-10' : 'sm:hover:scale-105'}
+                  sm:${index % 2 === 0 ? 'animate-bounce' : 'animate-pulse'}
                 `}
                 style={{
                   animationDelay: `${index * 0.3}s`,
@@ -89,31 +89,31 @@ function HowItWorks() {
                 
                 {/* Main card */}
                 <div className={`
-                  relative bg-slate-800/80 backdrop-blur-sm rounded-3xl p-8 border-2 border-slate-700/50
+                  relative bg-slate-800/80 backdrop-blur-sm rounded-3xl p-4 sm:p-8 border-2 border-slate-700/50
                   hover:border-transparent hover:shadow-2xl hover:shadow-cyan-500/20
-                  transition-all duration-500 transform hover:-translate-y-4
-                  ${isHovered ? 'shadow-2xl border-transparent' : ''}
+                  transition-all duration-500 transform sm:hover:-translate-y-4
+                  ${isHovered ? 'sm:shadow-2xl sm:border-transparent' : ''}
                   group-hover:bg-slate-800
                 `}>
                   
                   {/* Step number indicator */}
-                  <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm animate-pulse">
+                  <div className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm animate-pulse">
                     {index + 1}
                   </div>
 
                   {/* Animated icon container */}
-                  <div className="relative mb-6 transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
+                  <div className="relative mb-4 sm:mb-6 transform transition-all duration-500 group-hover:scale-110 sm:group-hover:rotate-6">
                     <div className={`absolute inset-0 bg-gradient-to-r ${step.bgGradient} rounded-2xl opacity-50 blur-md group-hover:opacity-80 transition-opacity duration-500`}></div>
-                    <div className="relative bg-slate-900/80 rounded-2xl p-4 w-fit mx-auto shadow-lg border border-slate-600/50 group-hover:border-transparent">
-                      <IconComponent className={`w-10 h-10 ${step.iconColor} group-hover:scale-125 transition-transform duration-300`} />
+                    <div className="relative bg-slate-900/80 rounded-2xl p-3 sm:p-4 w-fit mx-auto shadow-lg border border-slate-600/50 group-hover:border-transparent">
+                      <IconComponent className={`w-8 h-8 sm:w-10 sm:h-10 ${step.iconColor} group-hover:scale-125 transition-transform duration-300`} />
                     </div>
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-bold mb-4 text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-300">
+                  <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-500 group-hover:bg-clip-text transition-all duration-300">
                     {step.title}
                   </h3>
-                  <p className="text-slate-300 text-sm leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
                     {step.desc}
                   </p>
 

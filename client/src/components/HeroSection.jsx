@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [currentWord, setCurrentWord] = useState(0);
@@ -135,7 +134,7 @@ function HeroSection() {
             <button
               onClick={(e) => {
                 createRipple(e);
-                setTimeout(() => navigate('/book'), 200); // 🔁 Redirect to Book page
+                setTimeout(() => navigate("/book"), 200); // 🔁 Redirect to Book page
               }}
               className="group relative bg-gradient-to-r from-cyan-500 to-purple-600 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 overflow-hidden min-w-[180px]"
             >
@@ -174,7 +173,7 @@ function HeroSection() {
 
           {/* Stats Section */}
           <div
-            className={`grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto transform transition-all duration-1000 delay-1000 ${
+            className={`grid grid-cols-3 gap-3 sm:gap-6 max-w-[300px] sm:max-w-3xl mx-auto transform transition-all duration-1000 delay-1000 ${
               isVisible
                 ? "translate-y-0 opacity-100"
                 : "translate-y-20 opacity-0"
@@ -202,17 +201,17 @@ function HeroSection() {
             ].map((stat, index) => (
               <div
                 key={index}
-                className="group p-4 bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 rounded-2xl hover:border-cyan-400/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2"
+                className="group p-3 sm:p-4 bg-gray-800/50 backdrop-blur-xl border border-gray-700/50 rounded-2xl hover:border-cyan-400/50 transition-all duration-300 transform hover:scale-105 hover:-translate-y-2"
               >
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                <div className="text-2xl sm:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
                   {stat.icon}
                 </div>
                 <div
-                  className={`text-2xl font-black mb-1 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}
+                  className={`text-lg sm:text-2xl font-black mb-1 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}
                 >
                   {stat.number}
                 </div>
-                <p className="text-gray-300 font-medium text-sm">
+                <p className="text-gray-300 font-medium text-xs sm:text-sm">
                   {stat.label}
                 </p>
               </div>
